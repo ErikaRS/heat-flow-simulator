@@ -69,7 +69,7 @@ This document outlines the implementation plan for a simple heat flow simulator 
 ### Configuration Models
 - `Room`: id, origin_cm, dims_cm, initial_temp_c
 - `Hole`: id, origin_cm, size_cm, fixed_axis
-- `HouseConfig`: ambient_temp_c, timestep_s, conductivity
+- `HouseConfig`: ambient_temp_c, timestep_s
 - `SimulationConfig`: house, rooms, holes, simulation parameters
 
 ### Runtime Models
@@ -93,7 +93,7 @@ T_new(i) = T_old(i) + Fo * Σ_neighbors (T_old(n) - T_old(i))
 ```
 
 Where:
-- α = thermal diffusivity (k / ρc)
+- α = thermal diffusivity (assumed standard air properties)
 - Δt = 60 seconds (1 minute)
 - Δx = 0.10 m (10 cm cell size)
 

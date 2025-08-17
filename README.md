@@ -64,7 +64,6 @@ Create a YAML configuration file to define your house layout:
 house:
   ambient_temp_c: 5.0
   timestep_s: 60
-  conductivity: 0.14
 
 rooms:
   - id: living
