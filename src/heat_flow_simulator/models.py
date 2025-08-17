@@ -1,7 +1,8 @@
 """Configuration models for heat flow simulator."""
 
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 from pydantic import BaseModel, Field, field_validator, model_validator
+from datetime import datetime
 import numpy as np
 
 # Type aliases for coordinates
@@ -149,4 +150,24 @@ class SimulationConfig(BaseModel):
         """Ensure convergence threshold is positive."""
         if v <= 0:
             raise ValueError("Convergence threshold must be positive")
+        return v
+
+
+class SimulationRunMetadata(BaseModel):
+    """Metadata for a simulation run."""
+    id: Optional[int] = Field(None, description="Database ID (auto-generated)")
+    name: str = Field(..., description="Human-readable name for the simulation run")
+    description: Optional[str] = Field(None, description="Optional description of the run")
+    config: SimulationConfig = Field(..., description="Configuration used for this run")
+    created_at: Optional[datetime] = Field(None, description="When the run was created")
+    completed_at: Optional[datetime] = Field(None, description="When the run completed")
+    status: str = Field(default="created", description="Run status: created, running, completed, failed")
+    
+    @field_validator('status')
+    @classmethod
+    def validate_status(cls, v: str) -> str:
+        """Ensure status is valid."""
+        valid_statuses = {"created", "running", "completed", "failed"}
+        if v not in valid_statuses:
+            raise ValueError(f"Status must be one of: {valid_statuses}")
         return v
