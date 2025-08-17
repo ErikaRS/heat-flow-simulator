@@ -1,0 +1,29 @@
+# Sample Heat Flow Simulator Configuration
+# A simple 2-room house with living room and kitchen connected by a door
+
+house:
+  ambient_temp_c: 20.0
+  timestep_s: 1.0
+  conductivity: 0.5
+  
+  rooms:
+    - id: "living_room"
+      origin_cm: [0, 0, 0]
+      dims_cm: [400, 250, 300]  # 4m x 2.5m x 3m
+      initial_temp_c: 25.0
+    
+    - id: "kitchen"
+      origin_cm: [400, 0, 0]  # Adjacent to living room
+      dims_cm: [300, 250, 300]  # 3m x 2.5m x 3m
+      initial_temp_c: 18.0
+  
+  holes:
+    - id: "door_living_kitchen"
+      origin_cm: [400, 50, 0]  # Door in shared wall
+      size_cm: [0, 200, 80]    # Standard door: 2m wide x 0.8m high
+      fixed_axis: "x"          # Door is in the x-plane (wall perpendicular to x-axis)
+
+# Simulation parameters
+max_iterations: 1000
+convergence_threshold: 0.001
+output_interval: 50

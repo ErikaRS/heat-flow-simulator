@@ -1,0 +1,42 @@
+[tool.poetry]
+name = "heat-flow-simulator"
+version = "0.1.0"
+description = "A Python-based heat flow simulator for modeling thermal dynamics"
+authors = ["Erik Ars <erik@example.com>"]
+readme = "README.md"
+packages = [{include = "heat_flow_simulator", from = "src"}]
+
+[tool.poetry.scripts]
+heatflow = "heat_flow_simulator.cli:main"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pydantic = "^2.0"
+numpy = "^1.24"
+sqlalchemy = "^2.0"
+pyyaml = "^6.0"
+click = "^8.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.0"
+black = "^23.0"
+ruff = "^0.1"
+mypy = "^1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
