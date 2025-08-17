@@ -4,7 +4,6 @@
 house:
   ambient_temp_c: 20.0
   timestep_s: 1.0
-  conductivity: 0.5
   
   rooms:
     - id: "living_room"

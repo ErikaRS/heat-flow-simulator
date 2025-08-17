@@ -99,14 +99,13 @@ class HouseConfig(BaseModel):
     """Configuration for the house structure."""
     ambient_temp_c: float = Field(..., description="Ambient temperature outside the house")
     timestep_s: float = Field(default=1.0, description="Simulation timestep in seconds")
-    conductivity: float = Field(default=0.5, description="Thermal conductivity of materials")
     rooms: List[Room] = Field(..., description="List of rooms in the house")
     holes: List[Hole] = Field(default_factory=list, description="List of holes between rooms")
     
-    @field_validator('timestep_s', 'conductivity')
+    @field_validator('timestep_s')
     @classmethod
     def validate_positive_values(cls, v: float) -> float:
-        """Ensure timestep and conductivity are positive."""
+        """Ensure timestep is positive."""
         if v <= 0:
             raise ValueError("Value must be positive")
         return v
