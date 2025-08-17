@@ -2,7 +2,7 @@
 name = "heat-flow-simulator"
 version = "0.1.0"
 description = "A Python-based heat flow simulator for modeling thermal dynamics"
-authors = ["Erik Ars <erik@example.com>"]
+authors = ["Erika RS <erika@example.com>"]
 readme = "README.md"
 packages = [{include = "heat_flow_simulator", from = "src"}]
 
